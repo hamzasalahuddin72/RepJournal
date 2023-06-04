@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/main_bg_gradient"
+    app:layoutDescription="@xml/fragment_phases_scene"
+    tools:context=".TodayFragment">
+
+    <RelativeLayout
+        android:id="@+id/relative_layout_phases"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/user_profile_nav"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:background="@color/transparent"
+            android:elevation="10dp"
+            android:paddingVertical="10dp">
+
+            <!--            <ImageButton-->
+            <!--                android:id="@+id/back_button"-->
+            <!--                style="@style/phase_buttons"-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="match_parent"-->
+            <!--                android:layout_marginHorizontal="10dp"-->
+            <!--                android:backgroundTint="@color/transparent"-->
+            <!--                android:src="@drawable/ic_baseline_arrow_back_ios_24"-->
+            <!--                app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintTop_toTopOf="parent"-->
+            <!--                app:tint="@color/lightblue" />-->
+
+            <TextView
+                android:id="@+id/textView2"
+                style="@style/activity_title"
+                android:text="WORKOUT PHASES"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/user_icon"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/user_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/phase_icon"
+                android:layout_marginLeft="10dp"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/add_phase_btn_layout"
+            android:layout_below="@id/user_profile_nav"
+            android:orientation="vertical" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/add_phase_btn_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp">
+
+            <Button
+                android:id="@+id/add_phase_button"
+                style="@style/phase_buttons"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/lightblue"
+                android:text="ADD A PHASE"
+                android:textColor="@color/white"
+                android:textStyle="normal" />
+
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

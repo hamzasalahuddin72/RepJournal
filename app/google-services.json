@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "39158973182",
+    "project_id": "repstarjournal",
+    "storage_bucket": "repstarjournal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:39158973182:android:492953d30cd4544ae6dbaf",
+        "android_client_info": {
+          "package_name": "com.hamzasalahuddin.repjournal"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "39158973182-2cjrgi6ji8b3mq2pt3jh6rnrjf4ek3ao.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDiV3fCctqSmW47iVlUtjS4AU99HjxZ5aw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "39158973182-2cjrgi6ji8b3mq2pt3jh6rnrjf4ek3ao.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
