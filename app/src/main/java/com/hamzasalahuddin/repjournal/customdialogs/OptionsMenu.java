@@ -1,9 +1,7 @@
 package com.hamzasalahuddin.repjournal.customdialogs;
 
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -24,9 +22,7 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.hamzasalahuddin.repjournal.History;
 import com.hamzasalahuddin.repjournal.R;
-import com.hamzasalahuddin.repjournal.Workout;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -117,46 +113,46 @@ public class OptionsMenu extends Dialog {
                                                         if (exRecList.isEmpty()) {
                                                             exerciseRef.collection("exerciseData").document(exerciseDataList[finalI])
                                                                     .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                                @Override
-                                                                public void onSuccess(Void unused) {
-                                                                    exerciseRef.delete().addOnFailureListener(new OnFailureListener() {
                                                                         @Override
-                                                                        public void onFailure(@NonNull Exception e) {
-                                                                            Toast.makeText(getContext(), "Failed to delete exercise", Toast.LENGTH_SHORT).show();
+                                                                        public void onSuccess(Void unused) {
+                                                                            exerciseRef.delete().addOnFailureListener(new OnFailureListener() {
+                                                                                @Override
+                                                                                public void onFailure(@NonNull Exception e) {
+                                                                                    Toast.makeText(getContext(), "Failed to delete exercise", Toast.LENGTH_SHORT).show();
+                                                                                    dialog.dismiss();
+                                                                                }
+                                                                            });
                                                                             dialog.dismiss();
+                                                                            cancel();
                                                                         }
                                                                     });
-                                                                    dialog.dismiss();
-                                                                    cancel();
-                                                                }
-                                                            });
                                                         } else {
                                                             String[] exerciseRecordsList = exRecList.toArray(new String[0]);
                                                             for (int j = 0; j < exerciseRecordsList.length; j++) {
                                                                 exerciseRef.collection("exerciseData").document(exerciseDataList[finalI])
                                                                         .collection("exerciseRecords").document(exerciseRecordsList[j])
                                                                         .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                                                    @Override
-                                                                    public void onSuccess(Void unused) {
-                                                                        exerciseRef.collection("exerciseData").document(exerciseDataList[finalI])
-                                                                                .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
                                                                             @Override
                                                                             public void onSuccess(Void unused) {
-                                                                                exerciseRef.delete().addOnFailureListener(new OnFailureListener() {
-                                                                                    @Override
-                                                                                    public void onFailure(@NonNull Exception e) {
-                                                                                        Toast.makeText(getContext(), "Failed to delete exercise", Toast.LENGTH_SHORT).show();
-                                                                                        dialog.dismiss();
-                                                                                    }
-                                                                                });
+                                                                                exerciseRef.collection("exerciseData").document(exerciseDataList[finalI])
+                                                                                        .delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                                                            @Override
+                                                                                            public void onSuccess(Void unused) {
+                                                                                                exerciseRef.delete().addOnFailureListener(new OnFailureListener() {
+                                                                                                    @Override
+                                                                                                    public void onFailure(@NonNull Exception e) {
+                                                                                                        Toast.makeText(getContext(), "Failed to delete exercise", Toast.LENGTH_SHORT).show();
+                                                                                                        dialog.dismiss();
+                                                                                                    }
+                                                                                                });
+                                                                                                dialog.dismiss();
+                                                                                                cancel();
+                                                                                            }
+                                                                                        });
                                                                                 dialog.dismiss();
                                                                                 cancel();
                                                                             }
                                                                         });
-                                                                        dialog.dismiss();
-                                                                        cancel();
-                                                                    }
-                                                                });
                                                             }
                                                         }
                                                     } else {
@@ -209,15 +205,15 @@ public class OptionsMenu extends Dialog {
                                                         if (exDList.isEmpty()) {
                                                             muscleGroupRef.collection("exercises").document(exerciseList[finalI])
                                                                     .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                @Override
-                                                                public void onComplete(@NonNull Task<Void> task) {
-                                                                    if (task.isSuccessful()) {
-                                                                        deleteMuscleGroup(phaseId, workoutDay, muscleGroupTitle);
-                                                                    } else {
-                                                                        Toast.makeText(getContext(), "Failed to delete exercises", Toast.LENGTH_SHORT).show();
-                                                                    }
-                                                                }
-                                                            });
+                                                                        @Override
+                                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                                            if (task.isSuccessful()) {
+                                                                                deleteMuscleGroup(phaseId, workoutDay, muscleGroupTitle);
+                                                                            } else {
+                                                                                Toast.makeText(getContext(), "Failed to delete exercises", Toast.LENGTH_SHORT).show();
+                                                                            }
+                                                                        }
+                                                                    });
                                                         } else {
                                                             String[] exerciseDataList = exDList.toArray(new String[0]);
                                                             for (int j = 0; j < exerciseDataList.length; j++) {
@@ -238,43 +234,11 @@ public class OptionsMenu extends Dialog {
                                                                                         muscleGroupRef.collection("exercises").document(exerciseList[finalI])
                                                                                                 .collection("exerciseData").document(exerciseDataList[finalJ])
                                                                                                 .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                            @Override
-                                                                                            public void onComplete(@NonNull Task<Void> task) {
-                                                                                                if (task.isSuccessful()) {
-                                                                                                    muscleGroupRef.collection("exercises").document(exerciseList[finalI])
-                                                                                                            .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                                        @Override
-                                                                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                                                                            if (task.isSuccessful()) {
-                                                                                                                deleteMuscleGroup(phaseId, workoutDay, muscleGroupTitle);
-                                                                                                            } else {
-                                                                                                                Toast.makeText(getContext(), "Failed to delete exercises", Toast.LENGTH_SHORT).show();
-                                                                                                            }
-                                                                                                        }
-                                                                                                    });
-                                                                                                } else {
-                                                                                                    Toast.makeText(getContext(), "Failed to delete exercise data", Toast.LENGTH_SHORT).show();
-                                                                                                }
-                                                                                            }
-                                                                                        });
-                                                                                    } else {
-                                                                                        String[] exerciseRecordsList = exRecList.toArray(new String[0]);
-                                                                                        for (int k = 0; k < exerciseRecordsList.length; k++) {
-                                                                                            muscleGroupRef.collection("exercises").document(exerciseList[finalI])
-                                                                                                    .collection("exerciseData").document(exerciseDataList[finalJ])
-                                                                                                    .collection("exerciseRecords").document(exerciseRecordsList[k])
-                                                                                                    .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                                @Override
-                                                                                                public void onComplete(@NonNull Task<Void> task) {
-                                                                                                    if (task.isSuccessful()) {
-                                                                                                        muscleGroupRef.collection("exercises").document(exerciseList[finalI])
-                                                                                                                .collection("exerciseData").document(exerciseDataList[finalJ])
-                                                                                                                .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                                            @Override
-                                                                                                            public void onComplete(@NonNull Task<Void> task) {
-                                                                                                                if (task.isSuccessful()) {
-                                                                                                                    muscleGroupRef.collection("exercises").document(exerciseList[finalI])
-                                                                                                                            .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                    @Override
+                                                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                                                        if (task.isSuccessful()) {
+                                                                                                            muscleGroupRef.collection("exercises").document(exerciseList[finalI])
+                                                                                                                    .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                                                                         @Override
                                                                                                                         public void onComplete(@NonNull Task<Void> task) {
                                                                                                                             if (task.isSuccessful()) {
@@ -284,16 +248,48 @@ public class OptionsMenu extends Dialog {
                                                                                                                             }
                                                                                                                         }
                                                                                                                     });
-                                                                                                                } else {
-                                                                                                                    Toast.makeText(getContext(), "Failed to delete exercises data", Toast.LENGTH_SHORT).show();
-                                                                                                                }
-                                                                                                            }
-                                                                                                        });
-                                                                                                    } else {
-                                                                                                        Toast.makeText(getContext(), "Failed to delete exercises records", Toast.LENGTH_SHORT).show();
+                                                                                                        } else {
+                                                                                                            Toast.makeText(getContext(), "Failed to delete exercise data", Toast.LENGTH_SHORT).show();
+                                                                                                        }
                                                                                                     }
-                                                                                                }
-                                                                                            });
+                                                                                                });
+                                                                                    } else {
+                                                                                        String[] exerciseRecordsList = exRecList.toArray(new String[0]);
+                                                                                        for (int k = 0; k < exerciseRecordsList.length; k++) {
+                                                                                            muscleGroupRef.collection("exercises").document(exerciseList[finalI])
+                                                                                                    .collection("exerciseData").document(exerciseDataList[finalJ])
+                                                                                                    .collection("exerciseRecords").document(exerciseRecordsList[k])
+                                                                                                    .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                        @Override
+                                                                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                                                                            if (task.isSuccessful()) {
+                                                                                                                muscleGroupRef.collection("exercises").document(exerciseList[finalI])
+                                                                                                                        .collection("exerciseData").document(exerciseDataList[finalJ])
+                                                                                                                        .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                                            @Override
+                                                                                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                                                                                if (task.isSuccessful()) {
+                                                                                                                                    muscleGroupRef.collection("exercises").document(exerciseList[finalI])
+                                                                                                                                            .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                                                                @Override
+                                                                                                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                                                                                                    if (task.isSuccessful()) {
+                                                                                                                                                        deleteMuscleGroup(phaseId, workoutDay, muscleGroupTitle);
+                                                                                                                                                    } else {
+                                                                                                                                                        Toast.makeText(getContext(), "Failed to delete exercises", Toast.LENGTH_SHORT).show();
+                                                                                                                                                    }
+                                                                                                                                                }
+                                                                                                                                            });
+                                                                                                                                } else {
+                                                                                                                                    Toast.makeText(getContext(), "Failed to delete exercises data", Toast.LENGTH_SHORT).show();
+                                                                                                                                }
+                                                                                                                            }
+                                                                                                                        });
+                                                                                                            } else {
+                                                                                                                Toast.makeText(getContext(), "Failed to delete exercises records", Toast.LENGTH_SHORT).show();
+                                                                                                            }
+                                                                                                        }
+                                                                                                    });
                                                                                         }
                                                                                     }
                                                                                 } else {
@@ -344,56 +340,56 @@ public class OptionsMenu extends Dialog {
                 .collection("exerciseData").document(exerciseDateCreated);
         exerciseDataRef.collection("exerciseRecords").orderBy("setCount")
                 .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    exRecList = new ArrayList<>();
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        exRecList.add(document.getId());
-                    }
-
-                    if (exRecList.isEmpty()) {
-                        exerciseDataRef.delete().addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(getContext(), "Failed to delete exercise data", Toast.LENGTH_SHORT).show();
-                                dialog.dismiss();
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            exRecList = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                exRecList.add(document.getId());
                             }
-                        });
-                        dialog.dismiss();
-                        cancel();
-                    } else {
-                        String[] exerciseRecordsList = exRecList.toArray(new String[0]);
-                        for (int i = 0; i < exerciseRecordsList.length; i++) {
-                            exerciseDataRef.collection("exerciseRecords").document(exerciseRecordsList[i])
-                                    .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull Task<Void> task) {
-                                    if (task.isSuccessful()) {
-                                        exerciseDataRef.delete().addOnFailureListener(new OnFailureListener() {
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Toast.makeText(getContext(), "Failed to delete exercise data", Toast.LENGTH_SHORT).show();
-                                                dialog.dismiss();
-                                            }
-                                        });
+
+                            if (exRecList.isEmpty()) {
+                                exerciseDataRef.delete().addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Toast.makeText(getContext(), "Failed to delete exercise data", Toast.LENGTH_SHORT).show();
                                         dialog.dismiss();
-                                        cancel();
-                                    } else {
-                                        Toast.makeText(getContext(), "Failed to delete exercise records", Toast.LENGTH_SHORT).show();
                                     }
-                                    dialog.dismiss();
+                                });
+                                dialog.dismiss();
+                                cancel();
+                            } else {
+                                String[] exerciseRecordsList = exRecList.toArray(new String[0]);
+                                for (int i = 0; i < exerciseRecordsList.length; i++) {
+                                    exerciseDataRef.collection("exerciseRecords").document(exerciseRecordsList[i])
+                                            .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<Void> task) {
+                                                    if (task.isSuccessful()) {
+                                                        exerciseDataRef.delete().addOnFailureListener(new OnFailureListener() {
+                                                            @Override
+                                                            public void onFailure(@NonNull Exception e) {
+                                                                Toast.makeText(getContext(), "Failed to delete exercise data", Toast.LENGTH_SHORT).show();
+                                                                dialog.dismiss();
+                                                            }
+                                                        });
+                                                        dialog.dismiss();
+                                                        cancel();
+                                                    } else {
+                                                        Toast.makeText(getContext(), "Failed to delete exercise records", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                    dialog.dismiss();
+                                                }
+                                            });
                                 }
-                            });
+                            }
+                            dialog.dismiss();
+                            cancel();
+                        } else {
+                            Toast.makeText(getContext(), "Task 1 failed", Toast.LENGTH_SHORT).show();
                         }
                     }
-                    dialog.dismiss();
-                    cancel();
-                } else {
-                    Toast.makeText(getContext(), "Task 1 failed", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+                });
     }
 
     public void deleteSet(String phaseId, String workoutDay, String muscleGroupTitle, String exerciseTitle, String exerciseDateCreated, String setCountId) {

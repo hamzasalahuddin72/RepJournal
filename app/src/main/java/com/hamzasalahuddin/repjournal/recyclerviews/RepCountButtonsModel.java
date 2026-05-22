@@ -3,7 +3,7 @@ package com.hamzasalahuddin.repjournal.recyclerviews;
 public class RepCountButtonsModel {
     private String repCountButtonIndex;
 
-    public RepCountButtonsModel () {
+    public RepCountButtonsModel() {
 
     }
 

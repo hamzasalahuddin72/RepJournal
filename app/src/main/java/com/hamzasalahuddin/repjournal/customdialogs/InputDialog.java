@@ -132,7 +132,7 @@ public class InputDialog extends Dialog {
             dialog.dismiss();
         } else {
             cancel();
-            Map<String,Object> phases = new HashMap<>();
+            Map<String, Object> phases = new HashMap<>();
             phases.put("phaseTitle", title_input);
             phases.put("dayPhaseCreated", day);
             phases.put("monthPhaseCreated", month);
