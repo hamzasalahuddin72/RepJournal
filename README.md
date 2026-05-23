@@ -163,51 +163,8 @@ Cloud Firestore was used because it allowed the app to store flexible nested wor
 The Firestore structure is organised around the user, then broken down into workout phases, calendar days, muscle groups, exercises and exercise records.
 
 <p align="center">
-  <img src="docs/screenshots/complete-workout-phase-structure.png" alt="RepJournal complete workout phase structure" width="420">
+  <img src="docs/screenshots/complete-workout-phase-structure.png" alt="RepJournal complete workout phase structure" width="160">
 </p>
-
-```text
-users
-└── {userId}
-    ├── credentials
-    │   └── {userId}
-    │       ├── firstname
-    │       ├── lastname
-    │       ├── email
-    │       └── dateAccountCreated
-    │
-    └── userdata
-        └── {phaseId}
-            ├── phaseTitle
-            ├── datePhaseCreated
-            │
-            └── calendar
-                └── {weekday}
-                    ├── dayTitle
-                    │
-                    └── musclegroups
-                        └── {muscleGroupTitle}
-                            ├── muscleGroupTitle
-                            ├── workoutDay
-                            ├── phaseId
-                            │
-                            └── exercises
-                                └── {exerciseTitle}
-                                    ├── exerciseTitle
-                                    ├── dateModified
-                                    │
-                                    └── exerciseData
-                                        └── {date}
-                                            ├── exerciseDataCreated
-                                            ├── exerciseDayCreated
-                                            ├── exerciseMonthCreated
-                                            │
-                                            └── exerciseRecords
-                                                └── set{number}
-                                                    ├── setCount
-                                                    ├── repCount
-                                                    └── weight
-```
 
 ## Application Flow
 ## What I Built
