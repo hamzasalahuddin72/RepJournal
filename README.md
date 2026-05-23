@@ -152,8 +152,60 @@ The dashboard was designed to keep workout actions and progress information clos
   <img src="docs/screenshots/stats-motionlayout-demonstration.png" alt="RepJournal dashboard interaction and progress chart view" width="420">
 </p>
 
-## Application Flow
 ## Firebase / Data Structure
+
+RepJournal uses Firebase as the backend for authentication, user data and profile image storage. The app separates each user’s data using their Firebase user ID, which means workout phases, weekly plans, exercises and logged sets are stored under the authenticated user account.
+
+Cloud Firestore was used because it allowed the app to store flexible nested workout data without needing a separate custom backend server. This was useful for an individual Android project because it let me focus on the mobile app logic, user flow and data structure while still working with a realistic cloud-backed database.
+
+### Firestore Structure
+
+The Firestore structure is organised around the user, then broken down into workout phases, calendar days, muscle groups, exercises and exercise records.
+
+```text
+users
+└── {userId}
+    ├── credentials
+    │   └── {userId}
+    │       ├── firstname
+    │       ├── lastname
+    │       ├── email
+    │       └── dateAccountCreated
+    │
+    └── userdata
+        └── {phaseId}
+            ├── phaseTitle
+            ├── datePhaseCreated
+            │
+            └── calendar
+                └── {weekday}
+                    ├── dayTitle
+                    │
+                    └── musclegroups
+                        └── {muscleGroupTitle}
+                            ├── muscleGroupTitle
+                            ├── workoutDay
+                            ├── phaseId
+                            │
+                            └── exercises
+                                └── {exerciseTitle}
+                                    ├── exerciseTitle
+                                    ├── dateModified
+                                    │
+                                    └── exerciseData
+                                        └── {date}
+                                            ├── exerciseDataCreated
+                                            ├── exerciseDayCreated
+                                            ├── exerciseMonthCreated
+                                            │
+                                            └── exerciseRecords
+                                                └── set{number}
+                                                    ├── setCount
+                                                    ├── repCount
+                                                    └── weight
+```
+
+## Application Flow
 ## What I Built
 ## Recent Repository Cleanup
 ## How to Run Locally
