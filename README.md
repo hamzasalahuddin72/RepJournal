@@ -261,15 +261,15 @@ The aim of this update is not to rewrite the app, but to present the original im
 
 ## How to Run Locally
 
-This project can be opened and run using Android Studio. The app uses Firebase services, so a Firebase project is required if you want to run the app with authentication, Firestore and profile image upload features.
+This project can be opened and run using Android Studio. RepJournal uses Firebase services, so a Firebase project is required if you want to run the app with authentication, Firestore database storage and profile image upload features.
 
 ### Prerequisites
 
 Before running the project, make sure you have:
 
 - Android Studio installed
-- Java / JDK configured for Android development
 - Android SDK installed
+- A compatible JDK configured for Android development
 - A Firebase project
 - An Android emulator or physical Android device
 
@@ -281,6 +281,52 @@ Before running the project, make sure you have:
 git clone https://github.com/hamzasalahuddin72/RepJournal.git
 cd RepJournal
 ```
+
+2. **Open the project in Android Studio**
+
+Open Android Studio, select **Open**, and choose the cloned `RepJournal` project folder.
+
+3. **Create or connect a Firebase project**
+
+Go to the Firebase Console and create a new Firebase project, or connect the app to an existing Firebase project.
+
+Enable the following Firebase services:
+
+- Firebase Authentication
+- Cloud Firestore
+- Firebase Storage
+
+4. **Add your Firebase configuration file**
+
+Download the `google-services.json` file from Firebase and place it inside:
+
+```text
+app/google-services.json
+```
+
+5. **Sync Gradle**
+
+Allow Android Studio to complete Gradle sync. If Android Studio asks to install missing SDK components, accept the installation.
+
+6. **Run the app**
+
+Select an Android emulator or connect a physical Android device, then click **Run** in Android Studio.
+
+### Build Notes
+
+This project was originally developed as a university Android project, so newer Android Studio versions may require Gradle/JDK compatibility checks. If Gradle fails because of an incompatible JVM, select a compatible Gradle JDK in Android Studio:
+
+```text
+File > Settings > Build, Execution, Deployment > Build Tools > Gradle > Gradle JDK
+```
+
+For this project, JDK 11 worked reliably during repository cleanup.
+
+### Security Note
+
+This repository is intended as a portfolio and university project showcase. If you connect your own Firebase project, review your Firestore and Storage security rules carefully before using the app with real user data.
+
+Do not expose private Firebase credentials, test accounts or personal user data in screenshots or commits.
 
 ## Future Improvements
 
