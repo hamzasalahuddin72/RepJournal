@@ -167,8 +167,164 @@ The Firestore structure is organised around the user, then broken down into work
 </p>
 
 ## Application Flow
+
+RepJournal follows a structured user journey from authentication to workout planning and exercise logging. The app was designed so that users do not jump straight into recording sets without first organising their training structure.
+
+### 1. Account Access
+
+When the app launches, it checks whether a Firebase user is already signed in. If no user is found, the user is directed to the login screen. New users can create an account and verify their email before accessing the main workout features.
+
+### 2. Main Dashboard
+
+After login, the user enters the main dashboard. This screen shows the current day, the planned muscle groups for that day, a start workout action and a simple weekly visual summary. The dashboard acts as the central point of the app.
+
+### 3. Workout Phase Creation
+
+Users can create workout phases to organise their training programme. Each phase is stored in Firestore and includes a weekly structure from Monday to Sunday. This allows the user to manage training across a full week rather than logging disconnected workout entries.
+
+### 4. Weekday Selection
+
+After selecting a phase, the user chooses a specific weekday. This links the workout to a planned day and helps keep the app organised around a weekly training routine.
+
+### 5. Muscle Group Planning
+
+Inside a selected weekday, the user can choose muscle groups such as chest, back, shoulders, biceps, triceps, legs, abdomen or rest. This step helps define the focus of the workout before exercises are added.
+
+### 6. Exercise Creation
+
+The user can then add exercises under the selected muscle group. Exercises are stored under the relevant phase, weekday and muscle group, keeping the workout data organised and easy to retrieve later.
+
+### 7. Set, Rep and Weight Logging
+
+For each exercise, the user can record workout performance by adding sets, reps and weight values. These records are stored in Firestore under the selected exercise and date, allowing the app to build a history of previous workout activity.
+
+### 8. Workout History and Progress
+
+Logged exercises can be reviewed through the workout history flow. The dashboard also uses the stored workout data to provide simple chart-based progress feedback, helping users see how their training is distributed across the week.
+
 ## What I Built
+
+This was an individual project, so I was responsible for the full development process, from planning the app structure to implementing the Android screens, Firebase integration and workout logging logic.
+
+### Android Application Structure
+
+I built the app using Java in Android Studio, with separate activities and fragments for authentication, dashboard navigation, workout phases, weekday selection, workout logging and profile management. The main app experience uses bottom navigation so users can move between Home, Phases and Profile without leaving the core app flow.
+
+### Firebase Authentication
+
+I implemented Firebase Authentication for user registration, login and email verification. This gave the app a proper account-based structure and ensured users could only access their workout data after signing in.
+
+### Firestore Workout Data Model
+
+I designed the Firestore data structure to store workout data under each authenticated user. The structure supports workout phases, weekdays, muscle groups, exercises, workout dates and individual set records. This was one of the most important technical parts of the project because the database structure had to match the way users naturally plan and log workouts.
+
+### Workout Logging System
+
+I built the workout logging flow so users could create training phases, select weekdays, add muscle groups, add exercises and record sets, reps and weights. The aim was to make the app feel practical during a real workout rather than just functioning as a basic form-based tracker.
+
+### Dynamic Data Display
+
+I used RecyclerView-based screens to display changing workout data from Firestore, including workout phases, muscle groups, exercises and logged records. This allowed the app interface to update based on the user’s stored workout structure.
+
+### Progress Visualisation
+
+I added simple chart-based progress summaries to help users understand their weekly training distribution. This gave the app a small analytics element and connected the workout records to a more visual user experience.
+
+### Profile and Image Upload
+
+I implemented a profile area where users can view their account details and upload a profile image. Firebase Storage was used to store and retrieve the profile image, while Picasso was used to load images into the app interface.
+
+### UI/UX Design
+
+I focused heavily on creating a smooth mobile experience, including custom dialogs, clear navigation, responsive screens, visual workout cards and a clean dashboard layout. The goal was to make the app easy to use during an actual workout session, where quick interaction matters.
+
 ## Recent Repository Cleanup
+
+This repository was revisited in 2026 as part of my software engineering portfolio preparation. The original application was developed during my BSc Computer Science degree and the core app functionality has been preserved.
+
+The recent cleanup work focuses on improving how the project is presented on GitHub, including clearer documentation, organised screenshots and a more detailed explanation of the app structure, Firebase data model and implementation decisions.
+
+### Recent Updates
+
+- Added a professional README structure to explain the project clearly.
+- Added screenshots showing the main user journey and app functionality.
+- Documented the Firebase Authentication and Firestore implementation.
+- Added a written application flow to explain how users move through the app.
+- Highlighted the technical features that demonstrate Android development, cloud-backed storage, authentication and UI/UX design.
+- Reviewed the repository for portfolio readiness before using it in placement and graduate software engineering applications.
+
+### Reason for Revisiting the Project
+
+RepJournal was already a strong academic project, but the original repository did not fully explain the scale of the work. The cleanup makes the project easier for recruiters, technical reviewers and career advisers to understand without needing to inspect every Java file manually.
+
+The aim of this update is not to rewrite the app, but to present the original implementation more professionally and make the technical decisions clearer.
+
 ## How to Run Locally
+
+This project can be opened and run using Android Studio. The app uses Firebase services, so a Firebase project is required if you want to run the app with authentication, Firestore and profile image upload features.
+
+### Prerequisites
+
+Before running the project, make sure you have:
+
+- Android Studio installed
+- Java / JDK configured for Android development
+- Android SDK installed
+- A Firebase project
+- An Android emulator or physical Android device
+
+### Setup Steps
+
+1. **Clone the repository**
+
+```bash
+git clone https://github.com/hamzasalahuddin72/RepJournal.git
+cd RepJournal
+```
+
 ## Future Improvements
+
+Although RepJournal achieved the main goals of the original university project, there are several improvements that could make the app more scalable, maintainable and production-ready.
+
+### Improve Code Structure
+
+The app could be refactored into a cleaner architecture such as MVVM. This would separate UI logic, business logic and Firebase data access more clearly, making the code easier to maintain and test.
+
+### Add Stronger Error Handling
+
+Some Firebase operations could be improved with more detailed error handling and clearer user feedback. This would make the app more reliable when network issues, failed uploads or missing data occur.
+
+### Strengthen Firebase Security Rules
+
+For a production version, Firestore and Firebase Storage rules should be reviewed carefully to ensure users can only read and write their own data. This is important because the app stores user-specific workout records and profile information.
+
+### Add Automated Testing
+
+The project could be improved with unit tests and UI tests for key flows such as login, phase creation, exercise logging and workout history. This would make future changes safer and help prevent regressions.
+
+### Improve Workout Analytics
+
+The current charting feature provides a simple weekly overview. Future improvements could include progress trends over time, personal best tracking, volume calculations, weekly comparisons and exercise-specific performance graphs.
+
+### Add Offline Support
+
+Firestore offline persistence could be used more deliberately so users can continue logging workouts when they have limited internet access. This would be especially useful in gym environments where connectivity may be inconsistent.
+
+### Improve Notification and Reminder Features
+
+The reminder feature could be expanded with more customisation, allowing users to set workout reminders by phase, weekday or specific training goal.
+
+### Modernise the Android Stack
+
+A future version could modernise the project using newer Android development practices, updated dependencies and possibly Kotlin or Jetpack Compose. The current version has been kept close to the original Java implementation to preserve the university project context.
+
 ## Author
+
+**Hamza Salahuddin**  
+BSc (Hons) Computer Science, University of Brighton  
+MSc Data Science, Kingston University London  
+
+- GitHub: [hamzasalahuddin72](https://github.com/hamzasalahuddin72)
+- Project Repository: [RepJournal](https://github.com/hamzasalahuddin72/RepJournal)
+
+This project was developed as part of my undergraduate Computer Science coursework and later revisited for portfolio presentation. It demonstrates my experience with Android development, Java, Firebase Authentication, Firestore, cloud-backed mobile applications, UI/UX design and user-focused software implementation.
