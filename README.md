@@ -13,7 +13,7 @@ The screenshots below show the main user journey in RepJournal, from authenticat
 RepJournal opens into a mobile-first workout dashboard where users can view their current training day, selected muscle groups and weekly exercise distribution.
 
 <p align="center">
-  <img src="docs/screenshots/front-page.png" alt="RepJournal app preview showing the home dashboard and weekly overview chart" width="850">
+  <img src="docs/screenshots/front-page.png" alt="RepJournal app preview showing the home dashboard and weekly overview chart" width="650">
 </p>
 
 ---
