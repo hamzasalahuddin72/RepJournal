@@ -33,7 +33,7 @@ Users can create an account, log in and verify their email before accessing the 
 The home screen shows the user’s current workout day, planned muscle groups, a start training action and a visual overview of the week. The bottom navigation provides quick access to Home, Phases and Profile.
 
 <p align="center">
-  <img src="docs/screenshots/home-screen.png" alt="RepJournal home dashboard showing today's workout and weekly overview chart" width="180">
+  <img src="docs/screenshots/home-screen.png" alt="RepJournal home dashboard showing today's workout and weekly overview chart" width="210">
 </p>
 
 ---
@@ -43,7 +43,7 @@ The home screen shows the user’s current workout day, planned muscle groups, a
 Users can organise training into workout phases, select specific weekdays from a calendar-style view and manage their profile from the main bottom navigation.
 
 <p align="center">
-  <img src="docs/screenshots/phase-weekdays-profile-fragments.png" alt="RepJournal workout phases, weekday calendar and profile screens" width="400">
+  <img src="docs/screenshots/phase-weekdays-profile-fragments.png" alt="RepJournal workout phases, weekday calendar and profile screens" width="600">
 </p>
 
 ---
