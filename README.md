@@ -162,6 +162,10 @@ Cloud Firestore was used because it allowed the app to store flexible nested wor
 
 The Firestore structure is organised around the user, then broken down into workout phases, calendar days, muscle groups, exercises and exercise records.
 
+<p align="center">
+  <img src="docs/screenshots/complete-workout-phase-structure.png" alt="RepJournal complete workout phase structure" width="420">
+</p>
+
 ```text
 users
 └── {userId}
