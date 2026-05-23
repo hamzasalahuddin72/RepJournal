@@ -89,7 +89,7 @@ The screenshots below show the main user journey in RepJournal, from account cre
 RepJournal provides a mobile-first workout dashboard where users can view the current training day, planned muscle groups and a weekly exercise overview.
 
 <p align="center">
-  <img src="docs/screenshots/front-page.png" alt="RepJournal app preview showing the dashboard and weekly overview" width="750">
+  <img src="docs/screenshots/front-page.png" alt="RepJournal app preview showing the dashboard and weekly overview" width="400">
 </p>
 
 ---
@@ -99,7 +99,7 @@ RepJournal provides a mobile-first workout dashboard where users can view the cu
 Users can create an account, log in and verify their email before accessing the main application. Firebase Authentication is used to manage registration, sign-in and verified access.
 
 <p align="center">
-  <img src="docs/screenshots/signup-activity.png" alt="RepJournal authentication screens including login, signup and email verification" width="750">
+  <img src="docs/screenshots/signup-activity.png" alt="RepJournal authentication screens including login, signup and email verification" width="280">
 </p>
 
 ---
@@ -119,7 +119,7 @@ The home screen shows the user’s current workout day, selected muscle groups, 
 Users can organise training into workout phases, select weekdays from a weekly calendar view and manage their profile through the main navigation.
 
 <p align="center">
-  <img src="docs/screenshots/phase-weekdays-profile-fragments.png" alt="RepJournal workout phases, weekday planning and profile screens" width="850">
+  <img src="docs/screenshots/phase-weekdays-profile-fragments.png" alt="RepJournal workout phases, weekday planning and profile screens" width="720">
 </p>
 
 ---
@@ -129,7 +129,7 @@ Users can organise training into workout phases, select weekdays from a weekly c
 The main workout flow guides the user from selecting a phase and weekday to choosing muscle groups, adding exercises and recording workout sets. This creates a structured route from planning to actual workout tracking.
 
 <p align="center">
-  <img src="docs/screenshots/how-to-log-exercise.png" alt="RepJournal workflow showing phase selection, weekday selection, muscle group selection and exercise logging" width="420">
+  <img src="docs/screenshots/how-to-log-exercise.png" alt="RepJournal workflow showing phase selection, weekday selection, muscle group selection and exercise logging" width="400">
 </p>
 
 ---
