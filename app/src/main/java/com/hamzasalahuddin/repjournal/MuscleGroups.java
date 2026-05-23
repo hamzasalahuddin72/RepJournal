@@ -1,10 +1,5 @@
 package com.hamzasalahuddin.repjournal;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
-
 import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -15,6 +10,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -138,12 +138,12 @@ public class MuscleGroups extends AppCompatActivity {
                     R.id.mg_clickable4, R.id.mg_clickable5, R.id.mg_clickable6, R.id.mg_clickable7};
             int[] checkboxArray = {R.id.checkBox1, R.id.checkBox2, R.id.checkBox3,
                     R.id.checkBox4, R.id.checkBox5, R.id.checkBox6, R.id.checkBox7};
-            int[]  mg_textviewsArray = {R.id.mg_textview1, R.id.mg_textview2, R.id.mg_textview3,
+            int[] mg_textviewsArray = {R.id.mg_textview1, R.id.mg_textview2, R.id.mg_textview3,
                     R.id.mg_textview4, R.id.mg_textview5, R.id.mg_textview6,
                     R.id.mg_textview7, R.id.mg_textview8};
-            int[]  mg_imagesArray = {R.id.shoulders_image, R.id.chest_image, R.id.biceps_image,
+            int[] mg_imagesArray = {R.id.shoulders_image, R.id.chest_image, R.id.biceps_image,
                     R.id.triceps_image, R.id.back_image, R.id.abdomen_image, R.id.legs_image, R.id.rest_image};
-            int[]  mg_containersArray = {R.id.mg_container1, R.id.mg_container2, R.id.mg_container3,
+            int[] mg_containersArray = {R.id.mg_container1, R.id.mg_container2, R.id.mg_container3,
                     R.id.mg_container4, R.id.mg_container5, R.id.mg_container6,
                     R.id.mg_container7, R.id.mg_container8};
 
@@ -175,25 +175,32 @@ public class MuscleGroups extends AppCompatActivity {
             if (checkBox1.isChecked()) {
                 addMuscleGroups("shoulders");
                 finish();
-            } if (checkBox2.isChecked()) {
+            }
+            if (checkBox2.isChecked()) {
                 addMuscleGroups("chest");
                 finish();
-            } if (checkBox3.isChecked()) {
+            }
+            if (checkBox3.isChecked()) {
                 addMuscleGroups("biceps");
                 finish();
-            } if (checkBox4.isChecked()) {
+            }
+            if (checkBox4.isChecked()) {
                 addMuscleGroups("triceps");
                 finish();
-            } if (checkBox5.isChecked()) {
+            }
+            if (checkBox5.isChecked()) {
                 addMuscleGroups("back");
                 finish();
-            } if (checkBox6.isChecked()) {
+            }
+            if (checkBox6.isChecked()) {
                 addMuscleGroups("abdomen");
                 finish();
-            } if (checkBox7.isChecked()) {
+            }
+            if (checkBox7.isChecked()) {
                 addMuscleGroups("legs");
                 finish();
-            } if (checkBox8.isChecked()) {
+            }
+            if (checkBox8.isChecked()) {
                 addMuscleGroups("rest");
                 finish();
             }
@@ -220,7 +227,7 @@ public class MuscleGroups extends AppCompatActivity {
         String phaseId = getIntent().getExtras().getString("phaseId");
         String workoutDay = getIntent().getExtras().getString("workoutDay");
 
-        Map<String,Object> musclegroups = new HashMap<>();
+        Map<String, Object> musclegroups = new HashMap<>();
         musclegroups.put("muscleGroupTitle", muscleGroup);
         musclegroups.put("phaseId", phaseId);
         musclegroups.put("workoutDay", workoutDay);

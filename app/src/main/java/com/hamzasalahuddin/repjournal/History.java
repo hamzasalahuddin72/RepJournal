@@ -1,15 +1,5 @@
 package com.hamzasalahuddin.repjournal;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
-import android.app.Application;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
@@ -20,18 +10,19 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.google.firebase.firestore.QuerySnapshot;
 import com.hamzasalahuddin.repjournal.customdialogs.CustomProgressDialog;
 import com.hamzasalahuddin.repjournal.customdialogs.OptionsMenu;
 import com.hamzasalahuddin.repjournal.recyclerviews.ExerciseRepsModel;
@@ -39,8 +30,6 @@ import com.hamzasalahuddin.repjournal.recyclerviews.ExercisesDataModel;
 import com.hamzasalahuddin.repjournal.recyclerviews.ExercisesDataViewHolder;
 import com.hamzasalahuddin.repjournal.recyclerviews.ExercisesRepsViewHolder;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Locale;
 
 public class History extends AppCompatActivity {
@@ -181,8 +170,8 @@ public class History extends AppCompatActivity {
 
                     @Override
                     protected void onBindViewHolder(@NonNull ExercisesRepsViewHolder holder, int position, @NonNull ExerciseRepsModel model) {
-                        String weight = "<small> <font color='#03dac5'>"+ model.getWeight() +"</font></small><br>"
-                                + "<big> <font-color='#000000'>"+ model.getRepCount() +"</font></big><br>";
+                        String weight = "<small> <font color='#03dac5'>" + model.getWeight() + "</font></small><br>"
+                                + "<big> <font-color='#000000'>" + model.getRepCount() + "</font></big><br>";
 
                         holder.exercise_rep_count.setText(Html.fromHtml(weight));
                         holder.set_title_rep_count.setText("SET " + model.getSetCount());

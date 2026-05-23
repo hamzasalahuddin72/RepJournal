@@ -8,14 +8,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.motion.widget.MotionLayout;
-import androidx.fragment.app.Fragment;
-
 import android.os.Handler;
 import android.os.Looper;
 import android.provider.MediaStore;
@@ -26,6 +18,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.activity.OnBackPressedCallback;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.motion.widget.MotionLayout;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -176,29 +175,29 @@ public class ProfileFragment extends Fragment {
 
     private void uploadImage(Uri imageUri) {
         storageReference.child("users/" + auth.getCurrentUser().getUid() + "/profile_pic")
-        .putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                user_profile_pic.setImageDrawable(null);
-                profile_pic_bg.setImageDrawable(null);
-                downloadImage();
-                handler.postDelayed(new Runnable() {
+                .putFile(imageUri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
-                    public void run() {
-                        if (user_profile_pic.getDrawable() != null) {
-                            blurBackground();
-                            Toast.makeText(getActivity(), "Saved", Toast.LENGTH_SHORT).show();
-                        }
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        user_profile_pic.setImageDrawable(null);
+                        profile_pic_bg.setImageDrawable(null);
+                        downloadImage();
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                if (user_profile_pic.getDrawable() != null) {
+                                    blurBackground();
+                                    Toast.makeText(getActivity(), "Saved", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        }, 3000);
                     }
-                }, 3000);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                Toast.makeText(getActivity(), "Failed to upload profile pic", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-            }
-        });
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(getActivity(), "Failed to upload profile pic", Toast.LENGTH_SHORT).show();
+                        dialog.dismiss();
+                    }
+                });
     }
 
     private void downloadImage() {
@@ -234,7 +233,7 @@ public class ProfileFragment extends Fragment {
 
     private void backToMainActivity() {
         Intent mainActivity = new Intent(getActivity(), MainActivity.class);
-        mainActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+        mainActivity.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(mainActivity);
     }
 }

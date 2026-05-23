@@ -1,14 +1,17 @@
 package com.hamzasalahuddin.repjournal;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.hardware.Sensor;
-import android.hardware.SensorEvent;
-import android.hardware.SensorEventListener;
-import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
@@ -19,16 +22,6 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.StaggeredGridLayoutManager;
-
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Legend;
@@ -145,28 +138,28 @@ public class TodayFragment extends Fragment {
         root.collection("userdata")
                 .orderBy("datePhaseCreated", Query.Direction.DESCENDING).limit(1).get()
                 .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    List<String> list = new ArrayList<>();
-                    for (QueryDocumentSnapshot document : task.getResult()) {
-                        list.add(document.getId());
-                    }
-                    String latestPhaseId = list.toString();
-                    latestPhaseIdFiltered = latestPhaseId.substring(1, latestPhaseId.length() - 1);
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()) {
+                            List<String> list = new ArrayList<>();
+                            for (QueryDocumentSnapshot document : task.getResult()) {
+                                list.add(document.getId());
+                            }
+                            String latestPhaseId = list.toString();
+                            latestPhaseIdFiltered = latestPhaseId.substring(1, latestPhaseId.length() - 1);
 
-                    start_workout_button.setOnClickListener(v -> getCurrentDayWorkout(latestPhaseIdFiltered));
+                            start_workout_button.setOnClickListener(v -> getCurrentDayWorkout(latestPhaseIdFiltered));
 
-                    if (!latestPhaseIdFiltered.isEmpty()) {
-                        todayWorkoutInitiate(latestPhaseIdFiltered);
-                        setupChart();
-                        loadChartData();
-                    } else {
-                        todayWorkoutInitiate(" ");
+                            if (!latestPhaseIdFiltered.isEmpty()) {
+                                todayWorkoutInitiate(latestPhaseIdFiltered);
+                                setupChart();
+                                loadChartData();
+                            } else {
+                                todayWorkoutInitiate(" ");
+                            }
+                        }
                     }
-                }
-            }
-        });
+                });
 
         top_profile_pic.setOnClickListener(v -> {
             Fragment fragment = new ProfileFragment();
@@ -181,17 +174,17 @@ public class TodayFragment extends Fragment {
     private void downloadImage() {
         storageReference.child("users/" + auth.getCurrentUser().getUid() + "/profile_pic")
                 .getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-            @Override
-            public void onSuccess(Uri uri) {
-                Picasso.get().load(uri).into(top_profile_pic);
-                dialog.dismiss();
-            }
-        }).addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                dialog.dismiss();
-            }
-        });
+                    @Override
+                    public void onSuccess(Uri uri) {
+                        Picasso.get().load(uri).into(top_profile_pic);
+                        dialog.dismiss();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        dialog.dismiss();
+                    }
+                });
     }
 
     public void getCurrentDayWorkout(String latestPhase) {
@@ -234,8 +227,8 @@ public class TodayFragment extends Fragment {
                                                 adapter = new MuscleGroupsAdapter((ArrayList<String>) list);
                                                 recyclerView.setAdapter(adapter);
 
-                                            String docs = list.toString();
-                                            String docsFiltered = docs.substring(1, docs.length() - 1);
+                                                String docs = list.toString();
+                                                String docsFiltered = docs.substring(1, docs.length() - 1);
                                                 if (docsFiltered.equals("rest")) {
                                                     start_workout_button.setEnabled(false);
                                                     start_workout_button.setBackgroundColor(gray);
@@ -303,14 +296,14 @@ public class TodayFragment extends Fragment {
                                             public void onComplete(@NonNull Task<QuerySnapshot> task) {
                                                 if (task.isSuccessful()) {
                                                     for (QueryDocumentSnapshot document : task.getResult()) {
-                                                        entries.add(new PieEntry((float) task.getResult().size()/100, document.getId().toUpperCase() + ""));
+                                                        entries.add(new PieEntry((float) task.getResult().size() / 100, document.getId().toUpperCase() + ""));
                                                     }
                                                     ArrayList<Integer> colors = new ArrayList<>();
-                                                    for (int color: ColorTemplate.MATERIAL_COLORS) {
+                                                    for (int color : ColorTemplate.MATERIAL_COLORS) {
                                                         colors.add(color);
                                                     }
 
-                                                    for (int color: ColorTemplate.VORDIPLOM_COLORS) {
+                                                    for (int color : ColorTemplate.VORDIPLOM_COLORS) {
                                                         colors.add(color);
                                                     }
 

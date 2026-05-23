@@ -1,14 +1,14 @@
 package com.hamzasalahuddin.repjournal;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -78,12 +78,12 @@ public class Signup extends AppCompatActivity {
         } else {
             dialog.show();
             auth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(task -> {
+                    .addOnCompleteListener(task -> {
                         String getFirstname = first_name.getText().toString();
                         String getLastname = last_name.getText().toString();
                         String getEmail = email_signup.getText().toString();
                         if (task.isSuccessful()) {
-                            Map<String,Object> userdata = new HashMap<>();
+                            Map<String, Object> userdata = new HashMap<>();
                             userdata.put("email", getEmail);
                             userdata.put("firstname", getFirstname);
                             userdata.put("lastname", getLastname);
@@ -108,7 +108,7 @@ public class Signup extends AppCompatActivity {
                                 }
                             });
                         }
-                });
+                    });
         }
     }
 

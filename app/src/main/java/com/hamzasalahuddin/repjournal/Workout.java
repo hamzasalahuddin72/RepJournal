@@ -1,16 +1,11 @@
 package com.hamzasalahuddin.repjournal;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Html;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.RelativeSizeSpan;
-import android.view.GestureDetector;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -32,7 +27,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.view.GestureDetectorCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.LinearSnapHelper;
 import androidx.recyclerview.widget.RecyclerView;
@@ -75,7 +69,7 @@ import java.util.Locale;
 import java.util.Map;
 
 public class Workout extends AppCompatActivity implements AdapterView.OnItemSelectedListener, RepCountAdapter.IRepCount {
-    FirestoreRecyclerAdapter<WorkoutModel,WorkoutViewHolder> adapter;
+    FirestoreRecyclerAdapter<WorkoutModel, WorkoutViewHolder> adapter;
     FirestoreRecyclerAdapter<ExercisesModel, ExercisesViewHolder> adapter2;
     FirestoreRecyclerAdapter<ExercisesDataModel, ExercisesDataViewHolder> adapter3;
     FirestoreRecyclerAdapter<ExerciseRepsModel, ExercisesRepsViewHolder> adapter4;
@@ -214,12 +208,13 @@ public class Workout extends AppCompatActivity implements AdapterView.OnItemSele
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.workout_item, parent, false);
                 return new WorkoutViewHolder(view);
             }
+
             @Override
             protected void onBindViewHolder(@NonNull WorkoutViewHolder workoutViewHolder, int position, @NonNull WorkoutModel workoutModel) {
                 String muscleGroupTitle = workoutModel.getMuscleGroupTitle();
 
                 workoutViewHolder.muscle_group_workout_title.setText(muscleGroupTitle.toUpperCase(Locale.ROOT));
-                workoutViewHolder.add_exercise_button.setOnClickListener(v ->  {
+                workoutViewHolder.add_exercise_button.setOnClickListener(v -> {
                     Bundle bundle = new Bundle();
                     bundle.putString("workoutDay", workoutDay);
                     inputDialog.show();
@@ -352,6 +347,7 @@ public class Workout extends AppCompatActivity implements AdapterView.OnItemSele
                                         .setQuery(query4, ExerciseRepsModel.class).build();
                                 adapter4 = new FirestoreRecyclerAdapter<ExerciseRepsModel, ExercisesRepsViewHolder>(recyclerOptions4) {
                                     int i = 0;
+
                                     @NonNull
                                     @Override
                                     public ExercisesRepsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -361,8 +357,8 @@ public class Workout extends AppCompatActivity implements AdapterView.OnItemSele
 
                                     @Override
                                     protected void onBindViewHolder(@NonNull ExercisesRepsViewHolder exercisesRepsViewHolder, int position4, @NonNull ExerciseRepsModel exerciseRepsModel) {
-                                        String weight = "<small> <font color='#03dac5'>"+ exerciseRepsModel.getWeight() +"</font></small><br>"
-                                                + "<big> <font-color='#000000'>"+ exerciseRepsModel.getRepCount() +"</font></big><br>";
+                                        String weight = "<small> <font color='#03dac5'>" + exerciseRepsModel.getWeight() + "</font></small><br>"
+                                                + "<big> <font-color='#000000'>" + exerciseRepsModel.getRepCount() + "</font></big><br>";
 
                                         exercisesRepsViewHolder.exercise_rep_count.setText(Html.fromHtml(weight));
                                         exercisesRepsViewHolder.set_title_rep_count.setText("SET " + exerciseRepsModel.getSetCount());
@@ -474,7 +470,7 @@ public class Workout extends AppCompatActivity implements AdapterView.OnItemSele
         if (!parent.getItemAtPosition(position).equals("kg")) {
             weightSelected = true;
             weight = parent.getItemAtPosition(position).toString();
-            if ( weightSelected == true) {
+            if (weightSelected == true) {
                 recycler_view_toggle_layout.setVisibility(View.VISIBLE);
             }
         } else {
@@ -526,7 +522,7 @@ public class Workout extends AppCompatActivity implements AdapterView.OnItemSele
     public void addExerciseData(String muscleGroupTitle, String exerciseTitle) {
         String dateModified = java.text.DateFormat.getDateTimeInstance().format(Calendar.getInstance().getTime());
         dialog.show();
-        Map<String,Object> exerciseData = new HashMap<>();
+        Map<String, Object> exerciseData = new HashMap<>();
         exerciseData.put("exerciseDataCreated", dayMonthYear);
         exerciseData.put("exerciseDayCreated", date);
         exerciseData.put("exerciseMonthCreated", month);
@@ -555,7 +551,7 @@ public class Workout extends AppCompatActivity implements AdapterView.OnItemSele
     }
 
     private void addExerciseRecords(String muscleGroupTitle, String exerciseTitle, String exerciseDateCreated, String setCount, String repCount, String weight) {
-        Map<String,Object> exerciseRecord = new HashMap<>();
+        Map<String, Object> exerciseRecord = new HashMap<>();
         exerciseRecord.put("setCount", setCount);
         exerciseRecord.put("repCount", repCount);
         exerciseRecord.put("weight", weight);

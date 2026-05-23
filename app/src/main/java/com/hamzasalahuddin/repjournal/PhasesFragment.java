@@ -2,25 +2,19 @@ package com.hamzasalahuddin.repjournal;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-
-import androidx.activity.OnBackPressedCallback;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -43,7 +37,7 @@ import java.util.List;
 
 public class PhasesFragment extends Fragment {
     Button add_phase_button;
-//    ImageButton back_button;
+    //    ImageButton back_button;
     CustomProgressDialog dialog;
     RelativeLayout relative_layout_phases;
     FirebaseAuth auth;
@@ -162,7 +156,7 @@ public class PhasesFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(adapter);
-}
+    }
 
     public class PhasesViewHolder extends RecyclerView.ViewHolder {
         private TextView phase_title, day_phase_created, month_phase_created;
@@ -209,15 +203,15 @@ public class PhasesFragment extends Fragment {
                                                         if (listMg.isEmpty()) {
                                                             phaseRef.collection("calendar").document(weeklist[finalI])
                                                                     .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                @Override
-                                                                public void onComplete(@NonNull Task<Void> task) {
-                                                                    if (task.isSuccessful()) {
-                                                                        deletePhase(phaseId);
-                                                                    } else {
-                                                                        Toast.makeText(getActivity(), "Failed to delete calendar", Toast.LENGTH_SHORT).show();
-                                                                    }
-                                                                }
-                                                            });
+                                                                        @Override
+                                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                                            if (task.isSuccessful()) {
+                                                                                deletePhase(phaseId);
+                                                                            } else {
+                                                                                Toast.makeText(getActivity(), "Failed to delete calendar", Toast.LENGTH_SHORT).show();
+                                                                            }
+                                                                        }
+                                                                    });
                                                         } else {
                                                             String[] mglist = listMg.toArray(new String[0]);
                                                             for (int j = 0; j < mglist.length; j++) {
@@ -238,25 +232,25 @@ public class PhasesFragment extends Fragment {
                                                                                         phaseRef.collection("calendar").document(weeklist[finalI])
                                                                                                 .collection("musclegroups").document(mglist[finalJ])
                                                                                                 .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                            @Override
-                                                                                            public void onComplete(@NonNull Task<Void> task) {
-                                                                                                if (task.isSuccessful()) {
-                                                                                                    phaseRef.collection("calendar").document(weeklist[finalI])
-                                                                                                            .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                                        @Override
-                                                                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                                                                            if (task.isSuccessful()) {
-                                                                                                                deletePhase(phaseId);
-                                                                                                            } else {
-                                                                                                                Toast.makeText(getActivity(), "Failed to delete calendar", Toast.LENGTH_SHORT).show();
-                                                                                                            }
+                                                                                                    @Override
+                                                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                                                        if (task.isSuccessful()) {
+                                                                                                            phaseRef.collection("calendar").document(weeklist[finalI])
+                                                                                                                    .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                                        @Override
+                                                                                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                                                                                            if (task.isSuccessful()) {
+                                                                                                                                deletePhase(phaseId);
+                                                                                                                            } else {
+                                                                                                                                Toast.makeText(getActivity(), "Failed to delete calendar", Toast.LENGTH_SHORT).show();
+                                                                                                                            }
+                                                                                                                        }
+                                                                                                                    });
+                                                                                                        } else {
+                                                                                                            Toast.makeText(getActivity(), "Failed to delete muscle groups", Toast.LENGTH_SHORT).show();
                                                                                                         }
-                                                                                                    });
-                                                                                                } else {
-                                                                                                    Toast.makeText(getActivity(), "Failed to delete muscle groups", Toast.LENGTH_SHORT).show();
-                                                                                                }
-                                                                                            }
-                                                                                        });
+                                                                                                    }
+                                                                                                });
                                                                                     } else {
                                                                                         String[] exerciseList = listEx.toArray(new String[0]);
                                                                                         for (int k = 0; k < exerciseList.length; k++) {
@@ -279,36 +273,36 @@ public class PhasesFragment extends Fragment {
                                                                                                                             .collection("musclegroups").document(mglist[finalJ])
                                                                                                                             .collection("exercises").document(exerciseList[finalK])
                                                                                                                             .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                                                        @Override
-                                                                                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                                                                                            if (task.isSuccessful()) {
-                                                                                                                                phaseRef.collection("calendar").document(weeklist[finalI])
-                                                                                                                                        .collection("musclegroups").document(mglist[finalJ])
-                                                                                                                                        .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                                                                    @Override
-                                                                                                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                                                                                                        if (task.isSuccessful()) {
-                                                                                                                                            phaseRef.collection("calendar").document(weeklist[finalI])
-                                                                                                                                                    .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                                                                                @Override
-                                                                                                                                                public void onComplete(@NonNull Task<Void> task) {
-                                                                                                                                                    if (task.isSuccessful()) {
-                                                                                                                                                        deletePhase(phaseId);
-                                                                                                                                                    } else {
-                                                                                                                                                        Toast.makeText(getActivity(), "Failed to delete calendar", Toast.LENGTH_SHORT).show();
+                                                                                                                                @Override
+                                                                                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                                                                                    if (task.isSuccessful()) {
+                                                                                                                                        phaseRef.collection("calendar").document(weeklist[finalI])
+                                                                                                                                                .collection("musclegroups").document(mglist[finalJ])
+                                                                                                                                                .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                                                                    @Override
+                                                                                                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                                                                                                        if (task.isSuccessful()) {
+                                                                                                                                                            phaseRef.collection("calendar").document(weeklist[finalI])
+                                                                                                                                                                    .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                                                                                        @Override
+                                                                                                                                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                                                                                                                                            if (task.isSuccessful()) {
+                                                                                                                                                                                deletePhase(phaseId);
+                                                                                                                                                                            } else {
+                                                                                                                                                                                Toast.makeText(getActivity(), "Failed to delete calendar", Toast.LENGTH_SHORT).show();
+                                                                                                                                                                            }
+                                                                                                                                                                        }
+                                                                                                                                                                    });
+                                                                                                                                                        } else {
+                                                                                                                                                            Toast.makeText(getActivity(), "Failed to delete muscle groups", Toast.LENGTH_SHORT).show();
+                                                                                                                                                        }
                                                                                                                                                     }
-                                                                                                                                                }
-                                                                                                                                            });
-                                                                                                                                        } else {
-                                                                                                                                            Toast.makeText(getActivity(), "Failed to delete muscle groups", Toast.LENGTH_SHORT).show();
-                                                                                                                                        }
+                                                                                                                                                });
+                                                                                                                                    } else {
+                                                                                                                                        Toast.makeText(getActivity(), "Failed to delete exercises", Toast.LENGTH_SHORT).show();
                                                                                                                                     }
-                                                                                                                                });
-                                                                                                                            } else {
-                                                                                                                                Toast.makeText(getActivity(), "Failed to delete exercises", Toast.LENGTH_SHORT).show();
-                                                                                                                            }
-                                                                                                                        }
-                                                                                                                    });
+                                                                                                                                }
+                                                                                                                            });
                                                                                                                 } else {
                                                                                                                     String[] exerciseDataList = exDList.toArray(new String[0]);
                                                                                                                     for (int l = 0; l < exerciseDataList.length; l++) {
@@ -333,47 +327,48 @@ public class PhasesFragment extends Fragment {
                                                                                                                                                         .collection("exercises").document(exerciseList[finalK])
                                                                                                                                                         .collection("exerciseData").document(exerciseDataList[finalL])
                                                                                                                                                         .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                                                                                    @Override
-                                                                                                                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                                                                                                                        if (task.isSuccessful()) {
-                                                                                                                                                            phaseRef.collection("calendar").document(weeklist[finalI])
-                                                                                                                                                                    .collection("musclegroups").document(mglist[finalJ])
-                                                                                                                                                                    .collection("exercises").document(exerciseList[finalK])
-                                                                                                                                                                    .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                                                                                                @Override
-                                                                                                                                                                public void onComplete(@NonNull Task<Void> task) {
-                                                                                                                                                                    if (task.isSuccessful()) {
-                                                                                                                                                                        phaseRef.collection("calendar").document(weeklist[finalI])
-                                                                                                                                                                                .collection("musclegroups").document(mglist[finalJ])
-                                                                                                                                                                                .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                                                                                                            @Override
-                                                                                                                                                                            public void onComplete(@NonNull Task<Void> task) {
-                                                                                                                                                                                if (task.isSuccessful()) {
-                                                                                                                                                                                    phaseRef.collection("calendar").document(weeklist[finalI])
-                                                                                                                                                                                            .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                                                                                                                        @Override
-                                                                                                                                                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                                                                                                                                                            if (task.isSuccessful()) {
-                                                                                                                                                                                                deletePhase(phaseId);
-                                                                                                                                                                                            } else {
-                                                                                                                                                                                                Toast.makeText(getActivity(), "Failed to delete calendar", Toast.LENGTH_SHORT).show();
-                                                                                                                                                                                            }
-                                                                                                                                                                                        }
-                                                                                                                                                                                    });
-                                                                                                                                                                                } else {
-                                                                                                                                                                                    Toast.makeText(getActivity(), "Failed to delete muscle groups", Toast.LENGTH_SHORT).show();                                                                                                                                                                                }
-                                                                                                                                                                            }
-                                                                                                                                                                        });
-                                                                                                                                                                    } else {
-                                                                                                                                                                        Toast.makeText(getActivity(), "Failed to delete exercises", Toast.LENGTH_SHORT).show();
-                                                                                                                                                                    }
+                                                                                                                                                            @Override
+                                                                                                                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                                                                                                                if (task.isSuccessful()) {
+                                                                                                                                                                    phaseRef.collection("calendar").document(weeklist[finalI])
+                                                                                                                                                                            .collection("musclegroups").document(mglist[finalJ])
+                                                                                                                                                                            .collection("exercises").document(exerciseList[finalK])
+                                                                                                                                                                            .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                                                                                                @Override
+                                                                                                                                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                                                                                                                                    if (task.isSuccessful()) {
+                                                                                                                                                                                        phaseRef.collection("calendar").document(weeklist[finalI])
+                                                                                                                                                                                                .collection("musclegroups").document(mglist[finalJ])
+                                                                                                                                                                                                .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                                                                                                                    @Override
+                                                                                                                                                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                                                                                                                                                        if (task.isSuccessful()) {
+                                                                                                                                                                                                            phaseRef.collection("calendar").document(weeklist[finalI])
+                                                                                                                                                                                                                    .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                                                                                                                                        @Override
+                                                                                                                                                                                                                        public void onComplete(@NonNull Task<Void> task) {
+                                                                                                                                                                                                                            if (task.isSuccessful()) {
+                                                                                                                                                                                                                                deletePhase(phaseId);
+                                                                                                                                                                                                                            } else {
+                                                                                                                                                                                                                                Toast.makeText(getActivity(), "Failed to delete calendar", Toast.LENGTH_SHORT).show();
+                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                    });
+                                                                                                                                                                                                        } else {
+                                                                                                                                                                                                            Toast.makeText(getActivity(), "Failed to delete muscle groups", Toast.LENGTH_SHORT).show();
+                                                                                                                                                                                                        }
+                                                                                                                                                                                                    }
+                                                                                                                                                                                                });
+                                                                                                                                                                                    } else {
+                                                                                                                                                                                        Toast.makeText(getActivity(), "Failed to delete exercises", Toast.LENGTH_SHORT).show();
+                                                                                                                                                                                    }
+                                                                                                                                                                                }
+                                                                                                                                                                            });
+                                                                                                                                                                } else {
+                                                                                                                                                                    Toast.makeText(getActivity(), "Failed to delete exercise data", Toast.LENGTH_SHORT).show();
                                                                                                                                                                 }
-                                                                                                                                                            });
-                                                                                                                                                        } else {
-                                                                                                                                                            Toast.makeText(getActivity(), "Failed to delete exercise data", Toast.LENGTH_SHORT).show();
-                                                                                                                                                        }
-                                                                                                                                                    }
-                                                                                                                                                });
+                                                                                                                                                            }
+                                                                                                                                                        });
                                                                                                                                             } else {
                                                                                                                                                 String[] exerciseRecordsList = exRecList.toArray(new String[0]);
                                                                                                                                                 for (int m = 0; m < exerciseRecordsList.length; m++) {
@@ -383,59 +378,59 @@ public class PhasesFragment extends Fragment {
                                                                                                                                                             .collection("exerciseData").document(exerciseDataList[finalL])
                                                                                                                                                             .collection("exerciseRecords").document(exerciseRecordsList[m])
                                                                                                                                                             .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                                                                                        @Override
-                                                                                                                                                        public void onComplete(@NonNull Task<Void> task) {
-                                                                                                                                                            if (task.isSuccessful()) {
-                                                                                                                                                                phaseRef.collection("calendar").document(weeklist[finalI])
-                                                                                                                                                                        .collection("musclegroups").document(mglist[finalJ])
-                                                                                                                                                                        .collection("exercises").document(exerciseList[finalK])
-                                                                                                                                                                        .collection("exerciseData").document(exerciseDataList[finalL])
-                                                                                                                                                                        .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                                                                                                    @Override
-                                                                                                                                                                    public void onComplete(@NonNull Task<Void> task) {
-                                                                                                                                                                        if (task.isSuccessful()) {
-                                                                                                                                                                            phaseRef.collection("calendar").document(weeklist[finalI])
-                                                                                                                                                                                    .collection("musclegroups").document(mglist[finalJ])
-                                                                                                                                                                                    .collection("exercises").document(exerciseList[finalK])
-                                                                                                                                                                                    .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                                                                                                                @Override
-                                                                                                                                                                                public void onComplete(@NonNull Task<Void> task) {
-                                                                                                                                                                                    if (task.isSuccessful()) {
-                                                                                                                                                                                        phaseRef.collection("calendar").document(weeklist[finalI])
-                                                                                                                                                                                                .collection("musclegroups").document(mglist[finalJ])
-                                                                                                                                                                                                .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                                                                                                                                                                            @Override
-                                                                                                                                                                                            public void onComplete(@NonNull Task<Void> task) {
-                                                                                                                                                                                                if (task.isSuccessful()) {
-                                                                                                                                                                                                    phaseRef.collection("calendar").document(weeklist[finalI])
-                                                                                                                                                                                                            .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                                                                                @Override
+                                                                                                                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                                                                                                                    if (task.isSuccessful()) {
+                                                                                                                                                                        phaseRef.collection("calendar").document(weeklist[finalI])
+                                                                                                                                                                                .collection("musclegroups").document(mglist[finalJ])
+                                                                                                                                                                                .collection("exercises").document(exerciseList[finalK])
+                                                                                                                                                                                .collection("exerciseData").document(exerciseDataList[finalL])
+                                                                                                                                                                                .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                                                                                                    @Override
+                                                                                                                                                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                                                                                                                                                        if (task.isSuccessful()) {
+                                                                                                                                                                                            phaseRef.collection("calendar").document(weeklist[finalI])
+                                                                                                                                                                                                    .collection("musclegroups").document(mglist[finalJ])
+                                                                                                                                                                                                    .collection("exercises").document(exerciseList[finalK])
+                                                                                                                                                                                                    .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                                                                                                                                                                                                         @Override
                                                                                                                                                                                                         public void onComplete(@NonNull Task<Void> task) {
                                                                                                                                                                                                             if (task.isSuccessful()) {
-                                                                                                                                                                                                                deletePhase(phaseId);
+                                                                                                                                                                                                                phaseRef.collection("calendar").document(weeklist[finalI])
+                                                                                                                                                                                                                        .collection("musclegroups").document(mglist[finalJ])
+                                                                                                                                                                                                                        .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                                                                                                                                            @Override
+                                                                                                                                                                                                                            public void onComplete(@NonNull Task<Void> task) {
+                                                                                                                                                                                                                                if (task.isSuccessful()) {
+                                                                                                                                                                                                                                    phaseRef.collection("calendar").document(weeklist[finalI])
+                                                                                                                                                                                                                                            .delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                                                                                                                                                                                                                @Override
+                                                                                                                                                                                                                                                public void onComplete(@NonNull Task<Void> task) {
+                                                                                                                                                                                                                                                    if (task.isSuccessful()) {
+                                                                                                                                                                                                                                                        deletePhase(phaseId);
+                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                            });
+                                                                                                                                                                                                                                } else {
+                                                                                                                                                                                                                                    Toast.makeText(getActivity(), "Failed to delete calendar", Toast.LENGTH_SHORT).show();
+                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                        });
+                                                                                                                                                                                                            } else {
+                                                                                                                                                                                                                Toast.makeText(getActivity(), "Failed to delete muscle group", Toast.LENGTH_SHORT).show();
                                                                                                                                                                                                             }
                                                                                                                                                                                                         }
                                                                                                                                                                                                     });
-                                                                                                                                                                                                } else {
-                                                                                                                                                                                                    Toast.makeText(getActivity(), "Failed to delete calendar", Toast.LENGTH_SHORT).show();
-                                                                                                                                                                                                }
-                                                                                                                                                                                            }
-                                                                                                                                                                                        });
-                                                                                                                                                                                    } else {
-                                                                                                                                                                                        Toast.makeText(getActivity(), "Failed to delete muscle group", Toast.LENGTH_SHORT).show();
+                                                                                                                                                                                        } else {
+                                                                                                                                                                                            Toast.makeText(getActivity(), "Failed to delete exercises", Toast.LENGTH_SHORT).show();
+                                                                                                                                                                                        }
                                                                                                                                                                                     }
-                                                                                                                                                                                }
-                                                                                                                                                                            });
-                                                                                                                                                                        } else {
-                                                                                                                                                                            Toast.makeText(getActivity(), "Failed to delete exercises", Toast.LENGTH_SHORT).show();
-                                                                                                                                                                        }
+                                                                                                                                                                                });
+                                                                                                                                                                    } else {
+                                                                                                                                                                        Toast.makeText(getActivity(), "Failed to delete exercises data", Toast.LENGTH_SHORT).show();
                                                                                                                                                                     }
-                                                                                                                                                                });
-                                                                                                                                                            } else {
-                                                                                                                                                                Toast.makeText(getActivity(), "Failed to delete exercises data", Toast.LENGTH_SHORT).show();
-                                                                                                                                                            }
-                                                                                                                                                        }
-                                                                                                                                                    });
+                                                                                                                                                                }
+                                                                                                                                                            });
                                                                                                                                                 }
                                                                                                                                             }
                                                                                                                                         } else {
