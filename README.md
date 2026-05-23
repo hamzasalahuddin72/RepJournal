@@ -89,7 +89,7 @@ The screenshots below show the main user journey in RepJournal, from account cre
 RepJournal provides a mobile-first workout dashboard where users can view the current training day, planned muscle groups and a weekly exercise overview.
 
 <p align="center">
-  <img src="docs/screenshots/front-page.png" alt="RepJournal app preview showing the dashboard and weekly overview" width="400">
+  <img src="docs/screenshots/title-page.png" alt="RepJournal app preview showing the dashboard and weekly overview" width="400">
 </p>
 
 ---
